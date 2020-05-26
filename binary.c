@@ -10,14 +10,17 @@ typedef struct node{
 
 node_t* init_list(int val);
 void push(node_t**,int);
+void begin_push(node_t**,int);
 void print_list(node_t*);
 
 int main()
 {
 		node_t* head;
+		begin_push(&head,2);
 		push(&head,3);
 		push(&head,4);
 		push(&head,5);
+		begin_push(&head,1);
 		print_list(head);
 		return 0;
 }
@@ -51,7 +54,19 @@ void push(node_t** head,int val)
 		current->next->next = NULL;
 }
 
-void
+void begin_push(node_t** head, int val)
+{
+		node_t* tmp_node;
+		
+		if(head == NULL)
+		{
+			*head = init_list(val);
+			return;
+		}
+		tmp_node = init_list(val);
+		tmp_node->next =*head;
+		*head = tmp_node;
+}
 
 void print_list(node_t* head)
 {
